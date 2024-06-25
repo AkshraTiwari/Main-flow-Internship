@@ -1,1 +1,46 @@
-https://colab.research.google.com/drive/1tE39q6vu-wzC94wgz4yfPU1rGAljQCF0
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Number of data points
+num_data_points = 1000
+
+# Generate synthetic data
+age = np.random.randint(20, 65, num_data_points)
+income = np.random.normal(50, 15, num_data_points)
+education = np.random.randint(1, 5, num_data_points)
+savings = np.random.normal(30, 10, num_data_points)
+
+# Create a DataFrame
+data = pd.DataFrame({
+    'Age': age,
+    'Income': income,
+    'Education': education,
+    'Savings': savings
+})
+
+# Explore the first few rows of the dataset
+print(data.head())
+
+# Summary statistics
+print(data.describe())
+
+# Pairplot for visualizing relationships
+sns.pairplot(data)
+plt.show()
+
+# Boxplot to identify outliers
+plt.figure(figsize=(10, 6))
+sns.boxplot(data=data[['Age', 'Income', 'Education', 'Savings']])
+plt.title('Boxplot of Age, Income, Education, and Savings')
+plt.show()
+
+# Correlation heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(data.corr(), annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+plt.title('Correlation Heatmap')
+plt.show()
